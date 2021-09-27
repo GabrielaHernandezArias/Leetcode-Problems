@@ -1,0 +1,94 @@
+/* 
+Problem: Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+
+Implement the MinStack class:
+
+MinStack() initializes the stack object.
+void push(int val) pushes the element val onto the stack.
+void pop() removes the element on the top of the stack.
+int top() gets the top element of the stack.
+int getMin() retrieves the minimum element in the stack.
+
+umpire:
+STACKS - LIFO, last in first out, stacks are made of nodes (singly linked list)
+
+*/
+class Node{
+    int data;
+    Node next;
+    
+    // a method in the class
+    public Node(){}
+    
+    public Node(int data){
+        this.data = data;
+    }
+}
+
+class MinStack {
+    Node topNode = new Node();
+
+    public MinStack() {  // initializes stack
+        topNode = null;
+    }
+    
+    public void push(int val) {     // put in an element
+        Node newNode = new Node(val);
+        
+        if (topNode == null) { 
+            topNode = newNode;
+        }
+        
+        // add to top of the stack
+        else{
+            newNode.next = topNode;
+            topNode = newNode;
+        }
+    }
+    
+    public void pop() {   // return last element and delete
+        if (topNode == null) return;
+        
+        else{
+            int tempValue = topNode.data;
+            topNode = topNode.next;   // deleting current top node 
+            System.out.println(tempValue);
+        }
+    }
+    
+    public int top() {  // return last element WITHOUT deleting
+        if (topNode == null) return 0;
+        else {
+             return topNode.data;
+        }
+    }
+    
+    public int getMin() {   // loop through stack, keep counter of min
+        if (topNode == null) return 0;
+        
+        int min = 2147483647;
+        Node tempNode = new Node();
+        tempNode = topNode;       // tempNode points to head
+        
+        while (tempNode !=null){
+            if (tempNode.data < min ) {
+                min = tempNode.data;
+            }
+            tempNode = tempNode.next;     // move pointer along to next 
+         }
+        return min;
+    }
+    
+}
+ 
+// evaluate: i don't use any helper space structures other than a temporary node - its space is O(1), constant
+// regarding big O, the time complexity is of O(1) for all methods since there is no looping through the list, except for the getMin method, where O(N) is found because we loop through until finding the min
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(val);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
