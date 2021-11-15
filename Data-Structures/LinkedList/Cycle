@@ -1,0 +1,53 @@
+/**
+ * 141, Linked List Cycle
+ 
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ 
+ UMPIRE
+ 
+ Understand - a cycle is reached if the next pointer points to a node that WE HAVE ALREADY SEEN, aka, a node with a lower index. so if the index of .next is LESS THAN or EQUAL to the current node, we have a cycle. We would only have to loop once so O(N)
+ 
+  Question - pos not passed as a parameter? what does that mean? that we can't use pos :(
+ 
+ Match - no extra DS needed, just loop through once and consider .next index. can we access the index of a LL? this question says we can using pos, but we usually can't - in which case we would use another approach. Okay so - we actually can't use pos, another approach is needed. Okay so we COULD use a hashmap and give each node a value of true if we have passed through it. but this requires extra space. how can we do this in o(n) time AND space? can we use pointers?
+ 
+ Plan - loop through once, checking if (current index < .next index). be careful of out of bounds since we're checking the .next. UPDATED PLAN: use two pointers, one of them goes twice as fast as the other. A - slow, B - fast. if there is no cycle, A < B always. so loop until B.next != null and then in every loop check that A < B. if ! A < B, return true, ending the while loop too. else return false
+ 
+ Implement -
+  
+ */
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        // edge
+         if (head==null) return false;
+        
+        // two pointers
+        ListNode A = head;          // slow
+        ListNode B = head;       // fast
+        
+        // when does the loop end? for even #s, at b.n.n, for odd #s, at b.n !=null
+        while ( B.next!=null && B.next.next!=null ){      
+            // A != null takes on the empty list edge case 
+            
+            // start loop, then keep it going
+            A = A.next;
+            B = B.next.next;
+            
+            // check if A != B, i'm doing this AFTER initializing bc at the start A=B=head
+            if (A==B){          // if B caught up to A, there is a cycle
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+// check edge cases
