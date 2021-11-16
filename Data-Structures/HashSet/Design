@@ -1,8 +1,4 @@
-/* 
-
-Leetcode #705. Hashset easy
-
-a hashset is an unordered set of elements (doesn't maintain insertion order). no duplicates are allowed
+/* a hashset is an unordered set of elements (doesn't maintain insertion order). no duplicates are allowed
 on the other hand, treesets are unordered BUT the are sorted in ascending order
 
 to build a hashset we will use an array of linked lists. each index in the array will have a linked list. this method of dealing with collisions is called separate chaining. 
@@ -48,8 +44,9 @@ class MyHashSet {
         // hash index of this element - where should it be stored already?
         int i = hashValue(key);
         
-        // if linked list in this bucket contains this element, remove it - WAIT HOW DO WE REMOVE FROM MIDDLE OF LL?
-        if (bucketArr[i].indexOf(key) != -1) {
+        // if linked list in this bucket contains this element, remove it 
+        if (bucketArr[i]!=null && bucketArr[i].indexOf(key) != -1) {
+            // if we don't add != null, we get a nullpointerexception
             bucketArr[i].remove(bucketArr[i].indexOf(key));
         }
     }
