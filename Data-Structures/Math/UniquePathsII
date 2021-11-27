@@ -1,0 +1,77 @@
+/*
+Leetcode #63
+
+1. declare 2D array (mxn, m:rows, n:columns)
+2. make first row and first column all 1's - except if obstacle
+3. fill in rest of chart adding - except if obstacle
+
+Questions - is it always a square? We will assume yes! yay - update: it's not lol, we shall fix this then
+
+Big O - is probably O(N) because we loop through all data once, and space also O(N)
+
+Errors: what if one of the corners is an obstacle? then ALL other squares to the right will be 0 too! so we need to have a boolean marking if in on of the first two loops when we assign all 1's we already found an obstacle
+
+faster than 100% of java submissions!! ;) yay!
+
+*/
+
+class Solution {
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        // since obstacle is 1, if content is 1, make 0
+        
+        // find out size of array
+      // System.out.println("size of whole array: " + obstacleGrid.length); // THIS IS ROWS
+      // System.out.println("size of one elem: " + obstacleGrid[0].length);  // THIS IS COLUMN #
+        
+        
+        // 1. 2D array dp
+        int numRows = obstacleGrid.length;
+        int numColumns = obstacleGrid[0].length;
+        int[][] arr = new int[numRows][numColumns];
+        boolean obstacleFound = false;
+        
+        // 2. make first row all 1's UNLESS obstacle (content is 1)
+        for (int i=0; i<numColumns; i++){
+            
+            if (obstacleGrid[0][i] == 1  || obstacleFound == true){  // we're staying in row 0
+                obstacleFound = true;
+                arr[0][i]=0;
+            }
+            else{
+             arr[0][i]=1;    // if no obstacles, we do what we normally do   
+            }
+        }
+        
+        obstacleFound = false;    // reset boolean
+        
+        // 3. make first column all 0's UNLESS obstacle (content is 1)
+        for (int i=0; i<numRows; i++){
+            
+            if (obstacleGrid[i][0] == 1 || obstacleFound == true){       // we switch rows
+                obstacleFound = true;
+                arr[i][0]=0;
+            }
+            else{
+             arr[i][0]=1;    // if no obstacles, we do what we normally do   
+            }
+        }
+        
+        // 4. fill in rest of 2D array
+        // i: row, j: column
+        for (int i=1; i<numRows; i++){
+            for (int j=1; j<numColumns; j++){
+                // if obstacle
+                if (obstacleGrid[i][j] == 1){
+                    arr[i][j] = 0;
+                }
+                // else, if no obstacle
+                else {
+                    arr[i][j]= arr[i-1][j] + arr[i][j-1];
+                }
+            }
+        }
+        
+        // 5. return 
+        return arr[numRows-1][numColumns-1];
+    }
+}
