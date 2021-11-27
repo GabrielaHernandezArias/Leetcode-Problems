@@ -1,0 +1,41 @@
+/*
+
+LEETCODE #62 - combinations, math
+
+find number of unique paths from point a to point b, if we can only move down or right 
+
+1. declare 2D array
+2. make row 0 all 1's
+3. make column 0 all 1's
+4. loop through two remaining rows making dp[i][j] = dp[i-1][j] + dp[i][j-1]
+5. return dp[m-1][n-1]
+
+*/
+
+class Solution {
+    public int uniquePaths(int m, int n) {
+        // 2d array
+        int[][] dp = new int[m][n];
+        
+        // 2. make row 0
+        for (int i=0; i<m; i++){
+            dp[i][0]=1;   // we're changing rows, so dp[i][0]
+        }
+        
+        // 3. make column 0
+        for (int i=0; i<n; i++){
+            dp[0][i]=1;
+        }
+        
+        // 4. fill out rest of array
+        for (int i=1; i<m; i++){
+            for (int j=1; j<n; j++){
+                // we start with dp[1][1]
+                dp[i][j]= dp[i-1][j]+ dp[i][j-1];
+            }
+        }
+        
+        // 5. return
+        return dp[m-1][n-1];
+    }
+}
