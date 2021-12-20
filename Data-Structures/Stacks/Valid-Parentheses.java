@@ -19,34 +19,22 @@
 
 class Solution {
     
-    public boolean isValid(String s) {
-        
-        // 1. map
-        HashMap<Character,Character> symbols = new HashMap<>();
-        symbols.put(')','(');
-        symbols.put(']','[');
-        symbols.put('}','{');
-        
-        // 1.5 stack
-        Stack<Character> openingSymbols = new Stack<>();
-        
-        // 2. loop through the string
-        for (int i=0; i< s.length(); i++){
-            Character symbol = s.charAt(i);
-            
-            // is it an opening bracket or a closing one?
-            if (!symbols.containsKey(symbol)){
-                // opening one
-                openingSymbols.push(symbol);
-            }
-            // closing bracket 
-            else {
-                if (openingSymbols.isEmpty() || symbol!= openingSymbols.pop()){
-                    return false;
-                }
-            }
-        }
-        
-        return true;
+public boolean isValid(String s) {
+    
+	Stack<Character> stack = new Stack<Character>();
+	
+    for (char c : s.toCharArray()) {
+		if (c == '(')
+			stack.push(')');
+		else if (c == '{')
+			stack.push('}');
+		else if (c == '[')
+			stack.push(']');
+		else if (stack.isEmpty() || stack.pop() != c)
+			return false;
+	}
+    
+	return stack.isEmpty();
+    
     }
 }
