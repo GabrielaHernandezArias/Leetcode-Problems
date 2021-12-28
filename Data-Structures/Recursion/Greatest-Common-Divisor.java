@@ -11,6 +11,7 @@ TIME AND SPACE COMPLEXITY:
 euclid: faster than 38% java, uses less memory than 97% of java submissions
 other iterative solutions: faster than 100% of java, uses less memory than 30%
 
+apparently the worst time complexity for euclid's is related to the golden ratio. just leaving this here
 */
 
 class Solution {
