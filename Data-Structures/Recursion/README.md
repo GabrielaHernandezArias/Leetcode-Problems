@@ -14,3 +14,7 @@ These are the resources I'm using to teach myself recursion!
 6. Understand recursion in the Fibonacci Numbers
 7. Complete the Penn CS110 homework Exercises (https://www.seas.upenn.edu/~cis110/current/homework/sierpinski.html)
 
+
+Extra resources (when to use recursion):
+https://web.mit.edu/6.005/www/fa15/classes/10-recursion/
+https://introcs.cs.princeton.edu/java/23recursion/
