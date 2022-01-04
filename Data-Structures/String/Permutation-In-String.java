@@ -1,5 +1,6 @@
 /*
 Leetcode # 567 - Permutation in string, medium
+https://leetcode.com/problems/permutation-in-string/
 
 UNDERSTAND - two strings. return true if s2 contains a permutation of s1 (if one of s1's permutations is a substring of s2). do we have to calculate all permutations? probably not. should i learn to do this though? yessir
 
