@@ -18,3 +18,5 @@ These are the resources I'm using to teach myself recursion!
 Extra resources (when to use recursion):
 https://web.mit.edu/6.005/www/fa15/classes/10-recursion/
 https://introcs.cs.princeton.edu/java/23recursion/
+
+Real-world example of recursion: when someone is infected to get all total infected you have to go down and call infected again and for ex store in a stack to follow up with them, until n=0 (0 infected people = case 0 of infection)
