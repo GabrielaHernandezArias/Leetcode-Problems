@@ -1,5 +1,5 @@
 /*
-# 96 - Unique Binary Search Trees
+# 96 - Unique Binary Search Trees. --> COME BACK TO THIS ONE! dynamic programming
 
 PROBLEM:
 - we receive a number n
@@ -47,14 +47,13 @@ class Solution {
         // loop through
         // for example for n=3, we need subtrees 0,1,and 2
         // 
-        for (int i=2; i <=n; i++){
-            // subloop, for example: from 0 to less than 3
+        for (int numTrees=2; numTrees <=n; numTrees++){
+            // for example: from 0 to less or = 3
             // n is 3, we stop i <= 3
-            
             // first your root is 1, then root is 2 then root is 3 
             
-            for (int root=1; root <= i; root++){
-                arr[i] = arr[i] + arr[i-root] * arr[root-1];
+            for (int root=1; root <= numTrees; root++){
+                arr[numTrees] = arr[numTrees] + arr[numTrees-root] * arr[root-1];
             }
         }
         
@@ -64,4 +63,7 @@ class Solution {
     
 }
 
+// debug, print the following within inner loop: 
+// System.out.println("root " + root);
+// System.out.println("for i: "+i+", we add arr[i]: "+arr[i]+" +  i-root: "+(i-root)+" arr "+arr[i-root]+" root-1: "+(root-1)+" arr "+arr[root-1]);
 // big o is o(n^2) and space complexity o(n) :)
